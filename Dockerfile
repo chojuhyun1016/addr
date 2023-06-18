@@ -8,7 +8,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew bootJar
 
 FROM adoptopenjdk:8-jdk-hotspot
-COPY --from=builder build/libs/*.jar addr.jar
-
+COPY --from=builder build/libs/*.war addr.war
+VOLUME ["/data1/log"]
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/addr.jar"]
+ENTRYPOINT ["java", "-jar", "/addr.war"]
