@@ -5,7 +5,7 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 RUN chmod +x ./gradlew
-RUN ./gradlew bootJar
+RUN ./gradlew bootWar
 
 FROM adoptopenjdk:8-jdk-hotspot
 COPY --from=builder build/libs/*.war addr.war
