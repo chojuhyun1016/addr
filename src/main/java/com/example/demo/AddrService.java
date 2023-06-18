@@ -8,14 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
 public class AddrService
 {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String addr(HttpServletRequest req, Model model)
+	public ModelAndView addr(HttpServletRequest req, Model model)
 	{
+		ModelAndView modelAndView = new ModelAndView();
+
 		try
 		{
 			// 1. 서버 IP 구하기
@@ -34,6 +37,13 @@ public class AddrService
 
 		    System.out.println("src : [" + srv + "]");
 		    System.out.println("src : [" + cli + "]");
+		    
+	        
+	        modelAndView.setViewName("index");
+	        modelAndView.addObject("srv", srv);
+	        modelAndView.addObject("cli", cli);
+	        
+	        
 		}
 		catch (Exception e)
 		{
@@ -42,6 +52,6 @@ public class AddrService
 			e.printStackTrace();
 		}
 
-		return "index";
+		return modelAndView;
 	}
 }
