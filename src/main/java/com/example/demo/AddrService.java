@@ -42,6 +42,6 @@ public class AddrService
 			e.printStackTrace();
 		}
 
-		return "/index";
+		return "index";
 	}
 }
