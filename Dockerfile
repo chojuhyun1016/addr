@@ -1,14 +1,13 @@
 FROM openjdk:8-alpine AS builder
-RUN sudo apt-get update
-RUN sodu apt-get upgrade -y
-RUN sodu apt-get install git -y
-RUN mkdir /opt/app
-RUN git clone https://github.com/chojuhyun1016/addr.git /opt/app
-WORKDIR /opt/app/addr
+RUN sodu yum install git -y
+RUN git clone https://github.com/chojuhyun1016/addr.git .
+WORKDIR /addr
 RUN chmod +x ./gradlew
 RUN ./gradlew bootWar
 
 FROM openjdk:8-jre-alpine
+RUN mkdir /opt/app/addr
+WORKDIR /opt/app/addr
 COPY --from=builder build/libs/*.war addr.war
 VOLUME ["/data1/log"]
 EXPOSE 8080
