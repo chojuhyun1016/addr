@@ -1,8 +1,6 @@
-FROM openjdk:8-alpine AS builder
-RUN sodu yum install git
+FROM openjdk:8 AS builder
 RUN git clone https://github.com/chojuhyun1016/addr.git .
-WORKDIR /addr
-RUN chmod +x ./gradlew
+RUN chmod +x ./addr/gradlew
 RUN ./gradlew bootWar
 
 FROM openjdk:8-jre-alpine
