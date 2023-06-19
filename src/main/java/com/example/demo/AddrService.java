@@ -4,7 +4,6 @@ import java.net.InetAddress;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class AddrService
 {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView addr(HttpServletRequest req, Model model)
+	public ModelAndView addr(HttpServletRequest req)
 	{
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView modelAndView = null;
 
 		try
 		{
@@ -31,19 +30,12 @@ public class AddrService
 
 		    if (null == null)
 		    	cli = req.getRemoteAddr();
+	     
+		    modelAndView = new ModelAndView();
 
-		    model.addAttribute("srv", srv);
-		    model.addAttribute("cli", cli);
-
-		    System.out.println("src : [" + srv + "]");
-		    System.out.println("src : [" + cli + "]");
-		    
-	        
 	        modelAndView.setViewName("index");
 	        modelAndView.addObject("srv", srv);
 	        modelAndView.addObject("cli", cli);
-	        
-	        
 		}
 		catch (Exception e)
 		{
@@ -52,6 +44,6 @@ public class AddrService
 			e.printStackTrace();
 		}
 
-		return modelAndView;
+		return modelAndView;		
 	}
 }
