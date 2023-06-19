@@ -1,9 +1,6 @@
 FROM openjdk:8-alpine AS builder
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle .
-COPY settings.gradle .
-COPY src src
+RUN git clone https://github.com/chojuhyun1016/addr.git
+WORKDIR /addr
 RUN chmod +x ./gradlew
 RUN ./gradlew bootWar
 
