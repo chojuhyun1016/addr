@@ -1,5 +1,5 @@
 FROM openjdk:8-alpine AS builder
-RUN sodu yum install git -y
+RUN sodu yum install git
 RUN git clone https://github.com/chojuhyun1016/addr.git .
 WORKDIR /addr
 RUN chmod +x ./gradlew
